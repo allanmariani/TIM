@@ -1,0 +1,2016 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Application PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Application connector="sailpoint.connector.ADLDAPConnector" featuresString="PROVISIONING, SYNC_PROVISIONING, AUTHENTICATE, MANAGER_LOOKUP, SEARCH, UNSTRUCTURED_TARGETS, UNLOCK, ENABLE, PASSWORD, CURRENT_PASSWORD, NO_PERMISSIONS_PROVISIONING, ADDITIONAL_ACCOUNT_REQUEST, ACCOUNT_ONLY_REQUEST" icon="directory1Icon" name="Active Directory" profileClass="" type="Active Directory - Direct">
+          
+    
+    <AccountCorrelationConfig>
+                    
+        
+        <Reference class="sailpoint.object.CorrelationConfig" name="Active Directory Correlation"/>
+                  
+    
+    </AccountCorrelationConfig>
+          
+    
+    <Attributes>
+                    
+        
+        <Map>
+                              
+            
+            <entry key="IQServiceConfiguration">
+                                        
+                
+                <value>
+                                                  
+                    
+                    <List>
+                                                            
+                        
+                        <Map>
+                                                                      
+                            
+                            <entry key="IQServiceHost" value="ad-resource.seri.sailpointdemo.com"/>
+                                                                      
+                            
+                            <entry key="IQServicePassword"/>
+                                                                      
+                            
+                            <entry key="IQServicePort" value="5051"/>
+                                                                      
+                            
+                            <entry key="IQServiceUser"/>
+                                                                      
+                            
+                            <entry key="useTLSForIQService">
+                                                                                
+                                
+                                <value>
+                                                                                          
+                                    
+                                    <Boolean/>
+                                                                                        
+                                
+                                </value>
+                                                                              
+                            
+                            </entry>
+                                                                    
+                        
+                        </Map>
+                                                          
+                    
+                    </List>
+                                                
+                
+                </value>
+                                      
+            
+            </entry>
+                              
+            
+            <entry key="accountDeprovisionScenario" value="Disable Account Immediately"/>
+                              
+            
+            <entry key="acctAggregationEnd">
+                                        
+                
+                <value>
+                                                  
+                    
+                    <Date>1605814045473</Date>
+                                                
+                
+                </value>
+                                      
+            
+            </entry>
+                              
+            
+            <entry key="acctAggregationStart">
+                                        
+                
+                <value>
+                                                  
+                    
+                    <Date>1605814042571</Date>
+                                                
+                
+                </value>
+                                      
+            
+            </entry>
+                              
+            
+            <entry key="afterProvisioningRule" value="ActiveDirectory-AfterProvisioning"/>
+                              
+            
+            <entry key="allowAutoPartitioning">
+                                        
+                
+                <value>
+                                                  
+                    
+                    <Boolean/>
+                                                
+                
+                </value>
+                                      
+            
+            </entry>
+                              
+            
+            <entry key="authSearchAttributes">
+                                        
+                
+                <value>
+                                                  
+                    
+                    <List>
+                                                            
+                        
+                        <String>sAMAccountName</String>
+                                                            
+                        
+                        <String>msDS-PrincipalName</String>
+                                                            
+                        
+                        <String>mail</String>
+                                                          
+                    
+                    </List>
+                                                
+                
+                </value>
+                                      
+            
+            </entry>
+                              
+            
+            <entry key="autoPartitionCount" value="256"/>
+                              
+            
+            <entry key="beforeProvisioningRule"/>
+                              
+            
+            <entry key="cacheRemoteObjectPort" value="40002"/>
+                              
+            
+            <entry key="cacheRmiPort" value="40001"/>
+                              
+            
+            <entry key="compositeDefinition"/>
+                              
+            
+            <entry key="deletedObjectsContainer" value="CN=Deleted Objects,DOMAIN"/>
+                              
+            
+            <entry key="deltaAggregation">
+                                        
+                
+                <value>
+                                                  
+                    
+                    <Map>
+                                                            
+                        
+                        <entry key="dc=seri,dc=sailpointdemo,dc=com">
+                                                                      
+                            
+                            <value>
+                                                                                
+                                
+                                <Map>
+                                                                                          
+                                    
+                                    <entry key="groups_cookie" value="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"/>
+                                                                                          
+                                    
+                                    <entry key="lastDirsyncServer" value="ad-resource.seri.sailpointdemo.com"/>
+                                                                                          
+                                    
+                                    <entry key="users_cookie" value="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"/>
+                                                                                        
+                                
+                                </Map>
+                                                                              
+                            
+                            </value>
+                                                                    
+                        
+                        </entry>
+                                                          
+                    
+                    </Map>
+                                                
+                
+                </value>
+                                      
+            
+            </entry>
+                              
+            
+            <entry key="deltaIterationMode" value="dirSync"/>
+                              
+            
+            <entry key="disableComputePreloading">
+                                        
+                
+                <value>
+                                                  
+                    
+                    <Boolean/>
+                                                
+                
+                </value>
+                                      
+            
+            </entry>
+                              
+            
+            <entry key="disableFspAggregation">
+                                        
+                
+                <value>
+                                                  
+                    
+                    <Boolean/>
+                                                
+                
+                </value>
+                                      
+            
+            </entry>
+                              
+            
+            <entry key="domainSettings">
+                                        
+                
+                <value>
+                                                  
+                    
+                    <List>
+                                                            
+                        
+                        <Map>
+                                                                      
+                            
+                            <entry key="authenticationType" value="simple"/>
+                                                                      
+                            
+                            <entry key="authorizationType" value="simple"/>
+                                                                      
+                            
+                            <entry key="domainDN" value="DC=seri,DC=sailpointdemo,DC=com"/>
+                                                                      
+                            
+                            <entry key="domainIterateSearchFilter"/>
+                                                                      
+                            
+                            <entry key="domainNetBiosName" value="SERI"/>
+                                                                      
+                            
+                            <entry key="forestName" value="defaultForest"/>
+                                                                      
+                            
+                            <entry key="password" value="1:PRYxEtkZL2NkjofXmBp2/A=="/>
+                                                                      
+                            
+                            <entry key="port" value="389"/>
+                                                                      
+                            
+                            <entry key="servers"/>
+                                                                      
+                            
+                            <entry key="useSSL">
+                                                                                
+                                
+                                <value>
+                                                                                          
+                                    
+                                    <Boolean/>
+                                                                                        
+                                
+                                </value>
+                                                                              
+                            
+                            </entry>
+                                                                      
+                            
+                            <entry key="user" value="SERI\Administrator"/>
+                                                                    
+                        
+                        </Map>
+                                                          
+                    
+                    </List>
+                                                
+                
+                </value>
+                                      
+            
+            </entry>
+                              
+            
+            <entry key="enableCache">
+                                        
+                
+                <value>
+                                                  
+                    
+                    <Boolean>true</Boolean>
+                                                
+                
+                </value>
+                                      
+            
+            </entry>
+                              
+            
+            <entry key="enableOnReactivation">
+                                        
+                
+                <value>
+                                                  
+                    
+                    <Boolean>true</Boolean>
+                                                
+                
+                </value>
+                                      
+            
+            </entry>
+                              
+            
+            <entry key="forestSettings">
+                                        
+                
+                <value>
+                                                  
+                    
+                    <List>
+                                                            
+                        
+                        <Map>
+                                                                      
+                            
+                            <entry key="authenticationType" value="simple"/>
+                                                                      
+                            
+                            <entry key="authorizationType" value="simple"/>
+                                                                      
+                            
+                            <entry key="forestName" value="defaultForest"/>
+                                                                      
+                            
+                            <entry key="gcServer" value="seri.sailpointdemo.com:3268"/>
+                                                                      
+                            
+                            <entry key="isResourceForest">
+                                                                                
+                                
+                                <value>
+                                                                                          
+                                    
+                                    <Boolean/>
+                                                                                        
+                                
+                                </value>
+                                                                              
+                            
+                            </entry>
+                                                                      
+                            
+                            <entry key="manageAllDomains">
+                                                                                
+                                
+                                <value>
+                                                                                          
+                                    
+                                    <Boolean>true</Boolean>
+                                                                                        
+                                
+                                </value>
+                                                                              
+                            
+                            </entry>
+                                                                      
+                            
+                            <entry key="password" value="1:PRYxEtkZL2NkjofXmBp2/A=="/>
+                                                                      
+                            
+                            <entry key="useGroupMembershipPreloading"/>
+                                                                      
+                            
+                            <entry key="useSSL">
+                                                                                
+                                
+                                <value>
+                                                                                          
+                                    
+                                    <Boolean/>
+                                                                                        
+                                
+                                </value>
+                                                                              
+                            
+                            </entry>
+                                                                      
+                            
+                            <entry key="user" value="SERI\Administrator"/>
+                                                                    
+                        
+                        </Map>
+                                                          
+                    
+                    </List>
+                                                
+                
+                </value>
+                                      
+            
+            </entry>
+                              
+            
+            <entry key="host" value="seri.sailpointdemo.com"/>
+                              
+            
+            <entry key="lyncAttributes" value="RegistrarPool,SipAddressType,SipAddress,SipDomain,msRTCSIP-UserEnabled"/>
+                              
+            
+            <entry key="manageRecycleBin">
+                                        
+                
+                <value>
+                                                  
+                    
+                    <Boolean/>
+                                                
+                
+                </value>
+                                      
+            
+            </entry>
+                              
+            
+            <entry key="nativeChangeDetectionAttributeScope" value="entitlements"/>
+                              
+            
+            <entry key="nativeChangeDetectionAttributes"/>
+                              
+            
+            <entry key="nativeChangeDetectionEnabled">
+                                        
+                
+                <value>
+                                                  
+                    
+                    <Boolean>true</Boolean>
+                                                
+                
+                </value>
+                                      
+            
+            </entry>
+                              
+            
+            <entry key="nativeChangeDetectionOperations">
+                                        
+                
+                <value>
+                                                  
+                    
+                    <List>
+                                                            
+                        
+                        <String>Create</String>
+                                                            
+                        
+                        <String>Modify</String>
+                                                            
+                        
+                        <String>Delete</String>
+                                                          
+                    
+                    </List>
+                                                
+                
+                </value>
+                                      
+            
+            </entry>
+                              
+            
+            <entry key="pageSize" value="100"/>
+                              
+            
+            <entry key="searchDNs">
+                                        
+                
+                <value>
+                                                  
+                    
+                    <List>
+                                                            
+                        
+                        <Map>
+                                                                      
+                            
+                            <entry key="groupMemberFilterString"/>
+                                                                      
+                            
+                            <entry key="groupMembershipSearchDN"/>
+                                                                      
+                            
+                            <entry key="iterateSearchFilter"/>
+                                                                      
+                            
+                            <entry key="primaryGroupSearchDN"/>
+                                                                      
+                            
+                            <entry key="searchDN" value="ou=Demo,dc=seri,dc=sailpointdemo,dc=com"/>
+                                                                      
+                            
+                            <entry key="searchScope" value="SUBTREE"/>
+                                                                    
+                        
+                        </Map>
+                                                          
+                    
+                    </List>
+                                                
+                
+                </value>
+                                      
+            
+            </entry>
+                              
+            
+            <entry key="server" value="seri.sailpointdemo.com"/>
+                              
+            
+            <entry key="sysDescriptions">
+                                        
+                
+                <value>
+                                                  
+                    
+                    <Map>
+                                                            
+                        
+                        <entry key="en_US" value="Real AD domain running on Windows Server 2012 Standard&lt;br&gt;"/>
+                                                          
+                    
+                    </Map>
+                                                
+                
+                </value>
+                                      
+            
+            </entry>
+                              
+            
+            <entry key="templateApplication" value="Active Directory Template"/>
+                              
+            
+            <entry key="useSSL" value="false"/>
+                            
+        
+        </Map>
+                  
+    
+    </Attributes>
+          
+    
+    <Owner>
+                    
+        
+        <Reference class="sailpoint.object.Identity" name="AD Admins"/>
+                  
+    
+    </Owner>
+          
+    
+    <PasswordPolicies>
+                    
+        
+        <PasswordPolicyHolder>
+                              
+            
+            <PolicyRef>
+                                        
+                
+                <Reference class="sailpoint.object.PasswordPolicy" name="AD Password Policy"/>
+                                      
+            
+            </PolicyRef>
+                            
+        
+        </PasswordPolicyHolder>
+                  
+    
+    </PasswordPolicies>
+          
+    
+    <ProvisioningForms>
+                    
+        
+        <Form name="Account" objectType="account" type="Create">
+                              
+            
+            <Attributes>
+                                        
+                
+                <Map>
+                                                  
+                    
+                    <entry key="pageTitle" value="Account"/>
+                                                
+                
+                </Map>
+                                      
+            
+            </Attributes>
+                              
+            
+            <Section>
+                                        
+                
+                <Field displayName="Object Type" name="ObjectType" required="true" type="string" value="User"/>
+                                        
+                
+                <Field displayName="First Name" name="givenName" required="true" type="string">
+                                                  
+                    
+                    <Script>
+                                                            
+                        
+                        <Source><![CDATA[return identity.firstname;]]></Source>
+                                                          
+                    
+                    </Script>
+                                                
+                
+                </Field>
+                                        
+                
+                <Field displayName="Last Name" name="sn" required="true" type="string">
+                                                  
+                    
+                    <Script>
+                                                            
+                        
+                        <Source><![CDATA[return identity.lastname;]]></Source>
+                                                          
+                    
+                    </Script>
+                                                
+                
+                </Field>
+                                        
+                
+                <Field displayName="Display Name" name="displayName" required="true" type="string">
+                                                  
+                    
+                    <RuleRef>
+                                                            
+                        
+                        <Reference class="sailpoint.object.Rule" name="Provisioning Policy - AD Display Name"/>
+                                                          
+                    
+                    </RuleRef>
+                                                
+                
+                </Field>
+                                        
+                
+                <Field displayName="Distinguished Name" name="distinguishedName" required="true" type="string">
+                                                  
+                    
+                    <RuleRef>
+                                                            
+                        
+                        <Reference class="sailpoint.object.Rule" name="Provisioning Policy - AD Distinguished Name"/>
+                                                          
+                    
+                    </RuleRef>
+                                                
+                
+                </Field>
+                                        
+                
+                <Field displayName="sAMAccountName" name="sAMAccountName" required="true" type="string">
+                                                  
+                    
+                    <RuleRef>
+                                                            
+                        
+                        <Reference class="sailpoint.object.Rule" name="Provisioning Policy - sAMAccountName"/>
+                                                          
+                    
+                    </RuleRef>
+                                                
+                
+                </Field>
+                                        
+                
+                <Field displayName="User Principal Name" name="userPrincipalName" required="true" type="string">
+                                                  
+                    
+                    <Script>
+                                                            
+                        
+                        <Source><![CDATA[
+          
+               // Expect: java.lang.String sAMAccountName
+               // TODO: Make the source know previous fields
+               return sAMAccountName+"@sailpointdemo.com";
+              
+        ]]></Source>
+                                                          
+                    
+                    </Script>
+                                                
+                
+                </Field>
+                                        
+                
+                <Field displayName="employeeID" name="employeeID" type="string">
+                                                  
+                    
+                    <Script>
+                                                            
+                        
+                        <Source><![CDATA[
+           return identity.getAttribute("employeeId");
+           ]]></Source>
+                                                          
+                    
+                    </Script>
+                                                
+                
+                </Field>
+                                        
+                
+                <Field displayName="Password" name="*password*" required="true" type="secret" value="Welcome@123"/>
+                                        
+                
+                <Field displayName="Default Group" helpKey="In Distinguished Name format" name="primaryGroupDN" type="string"/>
+                                        
+                
+                <Field displayName="Description" name="description" type="string">
+                                                  
+                    
+                    <Script>
+                                                            
+                        
+                        <Source><![CDATA[
+          
+              import java.text.DateFormat;
+              import java.text.SimpleDateFormat;
+
+              DateFormat dateFormatter = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+
+              Date now = new Date();
+              return "Created by IdentityIQ on " + dateFormatter.format(now);
+              
+        ]]></Source>
+                                                          
+                    
+                    </Script>
+                                                
+                
+                </Field>
+                                        
+                
+                <Field displayName="Change password at next logon" name="pwdLastSet" type="boolean" value="false"/>
+                                        
+                
+                <Field displayName="Disabled" name="IIQDisabled" type="boolean" value="false"/>
+                                        
+                
+                <Field displayName="Dial-in access" name="msNPAllowDialin" type="string" value="Not Set">
+                                                  
+                    
+                    <AllowedValuesDefinition>
+                                                            
+                        
+                        <Value>
+                                                                      
+                            
+                            <List>
+                                                                                
+                                
+                                <String>Not Set</String>
+                                                                                
+                                
+                                <String>true</String>
+                                                                                
+                                
+                                <String>false</String>
+                                                                              
+                            
+                            </List>
+                                                                    
+                        
+                        </Value>
+                                                          
+                    
+                    </AllowedValuesDefinition>
+                                                
+                
+                </Field>
+                                        
+                
+                <Field displayName="Calling StationID" multi="true" name="msNPCallingStationID" type="string"/>
+                                        
+                
+                <Field displayName="Callback number" name="msRADIUSCallbackNumber" type="string"/>
+                                        
+                
+                <Field displayName="Static route" helpKey="Enter destination IP, Network mask &amp; cost metric. For example, 192.168.1.0/24 0.0.0.0 3" multi="true" name="msRADIUSFramedRoute" type="string"/>
+                                        
+                
+                <Field displayName="Static IP Address" helpKey="Define IP address. For example, 10.2.0.210" name="msRADIUSFramedIPAddress" type="string"/>
+                                        
+                
+                <Field displayName="Mailbox Database" helpKey="Mailbox store in DN format. Mandatory for creating mailbox." name="homeMDB" type="string"/>
+                                        
+                
+                <Field displayName="Exchange Alias" helpKey="Mandatory for creating mailbox." name="mailNickname" type="string"/>
+                                      
+            
+            </Section>
+                            
+        
+        </Form>
+                    
+        
+        <Form name="Create Group" objectType="group" type="Create">
+                              
+            
+            <Attributes>
+                                        
+                
+                <Map>
+                                                  
+                    
+                    <entry key="pageTitle" value="Create Group"/>
+                                                
+                
+                </Map>
+                                      
+            
+            </Attributes>
+                              
+            
+            <Section>
+                                        
+                
+                <Field displayName="distinguishedName" name="distinguishedName" required="true" type="string"/>
+                                        
+                
+                <Field displayName="sAMAccountName" name="sAMAccountName" required="true" type="string"/>
+                                      
+            
+            </Section>
+                            
+        
+        </Form>
+                    
+        
+        <Form name="Update Group" objectType="group" type="Update">
+                              
+            
+            <Attributes>
+                                        
+                
+                <Map>
+                                                  
+                    
+                    <entry key="pageTitle" value="Update Group"/>
+                                                
+                
+                </Map>
+                                      
+            
+            </Attributes>
+                              
+            
+            <Section>
+                                        
+                
+                <Field displayName="description" name="description" reviewRequired="true" type="string"/>
+                                        
+                
+                <Field displayName="Group Type" name="GroupType" reviewRequired="true" type="string" value="Security">
+                                                  
+                    
+                    <AllowedValuesDefinition>
+                                                            
+                        
+                        <Value>
+                                                                      
+                            
+                            <List>
+                                                                                
+                                
+                                <String>Security</String>
+                                                                                
+                                
+                                <String>Distribution</String>
+                                                                              
+                            
+                            </List>
+                                                                    
+                        
+                        </Value>
+                                                          
+                    
+                    </AllowedValuesDefinition>
+                                                
+                
+                </Field>
+                                        
+                
+                <Field displayName="Group Scope" name="GroupScope" reviewRequired="true" type="string" value="Global">
+                                                  
+                    
+                    <AllowedValuesDefinition>
+                                                            
+                        
+                        <Value>
+                                                                      
+                            
+                            <List>
+                                                                                
+                                
+                                <String>Domain local</String>
+                                                                                
+                                
+                                <String>Global</String>
+                                                                                
+                                
+                                <String>Universal</String>
+                                                                              
+                            
+                            </List>
+                                                                    
+                        
+                        </Value>
+                                                          
+                    
+                    </AllowedValuesDefinition>
+                                                
+                
+                </Field>
+                                        
+                
+                <Field displayName="Alias" helpKey="Required if want to create Distribution Group on exchange. Only Universal group type can be created on exchange" name="mailNickname" reviewRequired="true" type="string"/>
+                                      
+            
+            </Section>
+                            
+        
+        </Form>
+                  
+    
+    </ProvisioningForms>
+          
+    
+    <Schemas>
+                    
+        
+        <Schema displayAttribute="sAMAccountName" identityAttribute="distinguishedName" instanceAttribute="" nativeObjectType="User" objectType="account">
+                              
+            
+            <AttributeDefinition name="businessCategory" type="string">
+                                        
+                
+                <Description>business category</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition multi="true" name="carLicense" type="string">
+                                        
+                
+                <Description>vehicle license or registration plate</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="cn" type="string">
+                                        
+                
+                <Description>common name(s) for which the entity is known by</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="departmentNumber" type="string">
+                                        
+                
+                <Description>identifies a department within an organization</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="description" type="string">
+                                        
+                
+                <Description>descriptive information</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="destinationIndicator" type="string">
+                                        
+                
+                <Description>destination indicator</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="displayName" type="string">
+                                        
+                
+                <Description>preferred name to be used when displaying entries</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="distinguishedName" type="string">
+                                        
+                
+                <Description>distinguished name for which the entity is known by</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="employeeNumber" type="string">
+                                        
+                
+                <Description>numerically identifies an employee within an organization</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="employeeType" type="string">
+                                        
+                
+                <Description>type of employment for a person</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition multi="true" name="facsimileTelephoneNumber" type="string">
+                                        
+                
+                <Description>Facsimile (Fax) Telephone Number</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="givenName" type="string">
+                                        
+                
+                <Description>first name(s) for which the entity is known by</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="homePhone" type="string">
+                                        
+                
+                <Description>home telephone number</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="homePostalAddress" type="string">
+                                        
+                
+                <Description>home postal address</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="initials" type="string">
+                                        
+                
+                <Description>initials of some or all of names, but not the surname(s).</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="internationalISDNNumber" type="string">
+                                        
+                
+                <Description>international ISDN number</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="l" type="string">
+                                        
+                
+                <Description>city</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="mail" type="string">
+                                        
+                
+                <Description>RFC822 Mailbox</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="manager" type="string">
+                                        
+                
+                <Description>DN of manager</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="mobile" type="string">
+                                        
+                
+                <Description>mobile telephone number</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="o" type="string">
+                                        
+                
+                <Description>organization this object belongs to</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="ou" type="string">
+                                        
+                
+                <Description>organizational unit this object belongs to</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="pager" type="string">
+                                        
+                
+                <Description>pager telephone number</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="physicalDeliveryOfficeName" type="string">
+                                        
+                
+                <Description>Physical Delivery Office Name</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="postOfficeBox" type="string">
+                                        
+                
+                <Description>Post Office Box</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="postalAddress" type="string">
+                                        
+                
+                <Description>postal address</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="postalCode" type="string">
+                                        
+                
+                <Description>postal code</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="preferredDeliveryMethod" type="string">
+                                        
+                
+                <Description>preferred delivery method</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="preferredLanguage" type="string">
+                                        
+                
+                <Description>preferred written or spoken language for a person</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="registeredAddress" type="string">
+                                        
+                
+                <Description>registered postal address</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="roomNumber" type="string">
+                                        
+                
+                <Description>room number</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="secretary" type="string">
+                                        
+                
+                <Description>DN of secretary</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="seeAlso" type="string">
+                                        
+                
+                <Description>DN of related object</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="sn" type="string">
+                                        
+                
+                <Description>last (family) name(s) for which the entity is known by</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="st" type="string">
+                                        
+                
+                <Description>state or province which this object resides in</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="street" type="string">
+                                        
+                
+                <Description>street of this object</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="streetAddress" type="string">
+                                        
+                
+                <Description>street address of this object</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="telephoneNumber" type="string">
+                                        
+                
+                <Description>Telephone Number</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="teletexTerminalIdentifier" type="string">
+                                        
+                
+                <Description>Teletex Terminal Identifier</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="telexNumber" type="string">
+                                        
+                
+                <Description>Telex Number</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="title" type="string">
+                                        
+                
+                <Description>title associated with the entity</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="uid" type="string">
+                                        
+                
+                <Description>user identifier</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="userPrincipalName" type="string">
+                                        
+                
+                <Description>user principal name</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition multi="true" name="objectClass" type="string">
+                                        
+                
+                <Description>object classes of the entity</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition entitlement="true" managed="true" multi="true" name="memberOf" schemaObjectType="group" type="string">
+                                        
+                
+                <Description>Group Membership</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition correlationKey="1" name="objectSid" type="string">
+                                        
+                
+                <Description>Windows Security Identifier</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="objectguid" type="string">
+                                        
+                
+                <Description>Object globally unique identifier </Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="sAMAccountName" type="string">
+                                        
+                
+                <Description>sAMAccountName</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition multi="true" name="accountFlags" type="string">
+                                        
+                
+                <Description>List of the flags enabled on an account</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="department" type="string">
+                                        
+                
+                <Description>User's department</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition multi="true" name="msNPCallingStationID" type="string">
+                                        
+                
+                <Description>CallingStationID</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition multi="true" name="msRADIUSFramedRoute" type="string">
+                                        
+                
+                <Description>Static Routes for Dial-In connection</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="msNPAllowDialin" type="string">
+                                        
+                
+                <Description>Is dial-in allowed</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="msRADIUSCallbackNumber" type="string">
+                                        
+                
+                <Description>Callback Number</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="msRADIUSFramedIPAddress" type="string">
+                                        
+                
+                <Description>Define Static IP Address</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition internalName="targetAddress" name="externalEmailAddress" type="string">
+                                        
+                
+                <Description>External email address of Mail User</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="mailNickname" type="string">
+                                        
+                
+                <Description>Exchange Alias</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="homeMDB" type="string">
+                                        
+                
+                <Description>Exchange Database</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="msExchHideFromAddressLists" type="boolean">
+                                        
+                
+                <Description>Hide from Exchange address lists</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="msRTCSIP-UserEnabled" type="boolean">
+                                        
+                
+                <Description>User enabled for Skype for Business Server</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="SipAddress" type="string">
+                                        
+                
+                <Description>Skype for Business sipAddress</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="RegistrarPool" type="string">
+                                        
+                
+                <Description>Skype for Business Registrar pool</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="LyncPinSet" type="string">
+                                        
+                
+                <Description>Skype for Business user pin set status</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="LyncPinLockedOut" type="string">
+                                        
+                
+                <Description>Skype for Business user pin lock status</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="msDS-PrincipalName" type="string">
+                                        
+                
+                <Description>Name of the entity in the format "NetBIOS domain name\sAMAccountName"</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="employeeID" type="string">
+                                        
+                
+                <Description>numerically identifies an employee within an organization</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="primaryGroupDN" type="string">
+                                        
+                
+                <Description>DN of users primary group</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="primaryGroupID" type="string">
+                                        
+                
+                <Description>RID of users primary group</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="userAccountControl" type="string">
+                                        
+                
+                <Description>Flags on a user account</Description>
+                                      
+            
+            </AttributeDefinition>
+                            
+        
+        </Schema>
+                    
+        
+        <Schema descriptionAttribute="" displayAttribute="sAMAccountName" featuresString="PROVISIONING, GROUPS_HAVE_MEMBERS" hierarchyAttribute="memberOf" identityAttribute="distinguishedName" instanceAttribute="" nativeObjectType="Group" objectType="group">
+                              
+            
+            <AttributeDefinition name="cn" type="string">
+                                        
+                
+                <Description>common name(s) for which the entity is known by</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="distinguishedName" type="string">
+                                        
+                
+                <Description>distinguished name for which the entity is known by</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="owner" type="string">
+                                        
+                
+                <Description>owner (of the object)</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="description" type="string">
+                                        
+                
+                <Description>descriptive information</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition entitlement="true" indexed="true" multi="true" name="memberOf" schemaObjectType="group" type="string">
+                                        
+                
+                <Description>Group Membership</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition correlationKey="1" name="objectSid" type="string">
+                                        
+                
+                <Description>Windows Security Identifier</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="objectguid" type="string">
+                                        
+                
+                <Description>Object globally unique identifier </Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="mailNickname" type="string">
+                                        
+                
+                <Description>Exchange Distribution Group Name</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="GroupType" type="string">
+                                        
+                
+                <Description>Group Type</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="GroupScope" type="string">
+                                        
+                
+                <Description>Group Scope</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="sAMAccountName" type="string">
+                                        
+                
+                <Description>sAMAccountName</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="msDS-PrincipalName" type="string">
+                                        
+                
+                <Description>Name of the entity in the format "NetBIOS domain name\sAMAccountName"</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="o" type="string">
+                                        
+                
+                <Description>organization this object belongs to</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="ou" type="string">
+                                        
+                
+                <Description>organizational unit this object belongs to</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="managedBy" type="string">
+                                        
+                
+                <Description>The person who manages 'da group</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <AttributeDefinition name="userPrincipalName" type="string">
+                                        
+                
+                <Description>userPrincipalName</Description>
+                                      
+            
+            </AttributeDefinition>
+                              
+            
+            <Attributes>
+                                        
+                
+                <Map>
+                                                  
+                    
+                    <entry key="groupMemberAttribute" value="member"/>
+                                                
+                
+                </Map>
+                                      
+            
+            </Attributes>
+                            
+        
+        </Schema>
+                  
+    
+    </Schemas>
+          
+    
+    <ApplicationScorecard compositeScore="164">
+                    
+        
+        <Attributes>
+                              
+            
+            <Map>
+                                        
+                
+                <entry key="dormantAccount" value="0"/>
+                                        
+                
+                <entry key="inactiveAccount" value="80"/>
+                                        
+                
+                <entry key="privilegedAccount" value="500"/>
+                                        
+                
+                <entry key="riskyAccount" value="1000"/>
+                                        
+                
+                <entry key="serviceAccount" value="40"/>
+                                        
+                
+                <entry key="totalEntitlements" value="250"/>
+                                        
+                
+                <entry key="totalLinks" value="250"/>
+                                        
+                
+                <entry key="violatorAccount" value="20"/>
+                                      
+            
+            </Map>
+                            
+        
+        </Attributes>
+                    
+        
+        <ScoreItem compositePercentage="61" displayName="score_def_riskyAccount_name" score="1000" scorePercentage="100" type="riskyAccount">
+                              
+            
+            <SuggestionMessage>
+                                        
+                
+                <Message key="score_def_riskyAccount_suggest" type="Info"/>
+                                      
+            
+            </SuggestionMessage>
+                              
+            
+            <TargetMessage>
+                                        
+                
+                <Message key="link_attr_scorer_match_count" type="Info">
+                                                  
+                    
+                    <Parameters>
+                                                            
+                        
+                        <String>72</String>
+                                                            
+                        
+                        <String>250</String>
+                                                          
+                    
+                    </Parameters>
+                                                
+                
+                </Message>
+                                      
+            
+            </TargetMessage>
+                            
+        
+        </ScoreItem>
+                    
+        
+        <ScoreItem compositePercentage="30" displayName="score_def_privilegedAccount_name" score="500" scorePercentage="100" type="privilegedAccount">
+                              
+            
+            <SuggestionMessage>
+                                        
+                
+                <Message key="score_def_privilegedAccount_suggest" type="Info"/>
+                                      
+            
+            </SuggestionMessage>
+                              
+            
+            <TargetMessage>
+                                        
+                
+                <Message key="link_attr_scorer_match_count" type="Info">
+                                                  
+                    
+                    <Parameters>
+                                                            
+                        
+                        <String>25</String>
+                                                            
+                        
+                        <String>250</String>
+                                                          
+                    
+                    </Parameters>
+                                                
+                
+                </Message>
+                                      
+            
+            </TargetMessage>
+                            
+        
+        </ScoreItem>
+                    
+        
+        <ScoreItem compositePercentage="5" displayName="score_def_inactiveAccount_name" score="80" scorePercentage="100" type="inactiveAccount">
+                              
+            
+            <SuggestionMessage>
+                                        
+                
+                <Message key="score_def_inactiveAccount_suggest" type="Info"/>
+                                      
+            
+            </SuggestionMessage>
+                              
+            
+            <TargetMessage>
+                                        
+                
+                <Message key="link_attr_scorer_match_count" type="Info">
+                                                  
+                    
+                    <Parameters>
+                                                            
+                        
+                        <String>4</String>
+                                                            
+                        
+                        <String>250</String>
+                                                          
+                    
+                    </Parameters>
+                                                
+                
+                </Message>
+                                      
+            
+            </TargetMessage>
+                            
+        
+        </ScoreItem>
+                    
+        
+        <ScoreItem compositePercentage="2" displayName="score_def_serviceAccount_name" score="40" scorePercentage="100" type="serviceAccount">
+                              
+            
+            <SuggestionMessage>
+                                        
+                
+                <Message key="score_def_serviceAccount_suggest" type="Info"/>
+                                      
+            
+            </SuggestionMessage>
+                              
+            
+            <TargetMessage>
+                                        
+                
+                <Message key="link_attr_scorer_match_count" type="Info">
+                                                  
+                    
+                    <Parameters>
+                                                            
+                        
+                        <String>2</String>
+                                                            
+                        
+                        <String>250</String>
+                                                          
+                    
+                    </Parameters>
+                                                
+                
+                </Message>
+                                      
+            
+            </TargetMessage>
+                            
+        
+        </ScoreItem>
+                    
+        
+        <ScoreItem compositePercentage="1" displayName="score_def_violatorAccount_name" score="20" scorePercentage="100" type="violatorAccount">
+                              
+            
+            <SuggestionMessage>
+                                        
+                
+                <Message key="score_def_violatorAccount_suggest" type="Info"/>
+                                      
+            
+            </SuggestionMessage>
+                              
+            
+            <TargetMessage>
+                                        
+                
+                <Message key="link_attr_scorer_match_count" type="Info">
+                                                  
+                    
+                    <Parameters>
+                                                            
+                        
+                        <String>1</String>
+                                                            
+                        
+                        <String>250</String>
+                                                          
+                    
+                    </Parameters>
+                                                
+                
+                </Message>
+                                      
+            
+            </TargetMessage>
+                            
+        
+        </ScoreItem>
+                  
+    
+    </ApplicationScorecard>
+        
+
+</Application>
