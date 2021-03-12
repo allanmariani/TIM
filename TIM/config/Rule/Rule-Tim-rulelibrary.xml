@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Rule language="beanshell" name="Tim-RuleLibrary">
+          
+    
+    <Source><![CDATA[
+
+  import java.util.Hashtable;
+
+  import javax.naming.Context;
+  import javax.naming.NamingEnumeration;
+  import javax.naming.NamingException;
+  import javax.naming.directory.Attribute;
+  import javax.naming.directory.Attributes;
+  import javax.naming.directory.BasicAttribute;
+  import javax.naming.directory.BasicAttributes;
+  import javax.naming.directory.DirContext;
+  import javax.naming.directory.InitialDirContext;
+  import javax.naming.directory.ModificationItem;
+  import javax.naming.directory.SearchControls;
+  import javax.naming.directory.SearchResult;
+
+  import sailpoint.object.Identity;
+
+  private static String getUserDNPeople(String userName) {
+    String userDN = new StringBuffer().append("uid=").append(userName).append(",ou=People,dc=lab,dc=netbr").toString();
+    log.warn(userDN);
+    return userDN;
+  }
+
+  private static String getUserDNApplications(String userName, String application) {
+    String userDN = new StringBuffer().append("uid=").append(userName).append(",ou="+application+",ou=Applications,dc=lab,dc=netbr").toString();
+    log.warn(userDN);
+    return userDN;
+  }
+
+  public static DirContext getDirContext() {
+
+
+    // Hashtable<Object, Object> env = new Hashtable<Object, Object>();
+    Hashtable env = new Hashtable();
+
+    DirContext dctx = null;
+    String url = "ldap://10.0.2.154:1389";
+    String conntype = "simple";
+    String AdminDn = "cn=Directory Manager";
+    String password = "Computer01";
+    try {
+      env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
+      env.put(Context.PROVIDER_URL, url);
+      env.put(Context.SECURITY_AUTHENTICATION, conntype);
+      env.put(Context.SECURITY_PRINCIPAL, AdminDn);
+      env.put(Context.SECURITY_CREDENTIALS, password);
+
+      dctx = new InitialDirContext(env);
+    } catch (NamingException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+
+    return dctx;
+
+  }
+
+  public static boolean addUser(DirContext dctx, Identity identity, String application) {
+
+    try {
+      Attributes container = new BasicAttributes();
+
+      Attribute objClasses = new BasicAttribute("objectClass");
+      objClasses.add("top");
+      objClasses.add("customPerson");
+      objClasses.add("person");
+      objClasses.add("organizationalPerson");
+      objClasses.add("inetOrgPerson");
+      objClasses.add("pf-connected-identities");
+
+      //Person attributes
+      Attribute sn = new BasicAttribute("sn", identity.getLastname());
+      Attribute cn = new BasicAttribute("cn", identity.getName());
+      Attribute givenName = new BasicAttribute("givenName", identity.getFirstname());
+      Attribute userPassword = new BasicAttribute("userPassword", "Welcome@123");
+      Attribute uid = new BasicAttribute("uid", identity.getName());
+      Attribute mobile = new BasicAttribute("mobile", "+551198989898");
+      Attribute statusFlag = new BasicAttribute("statusFlag", "active");
+      log.warn("Application------------ " + application);
+      Attribute appRole = new BasicAttribute("applRole", application);
+
+      container.put(objClasses);
+      container.put(sn);
+      container.put(cn);
+      container.put(givenName);
+      container.put(userPassword);
+      container.put(uid);
+      container.put(mobile);
+      container.put(statusFlag);
+      container.put(appRole);
+
+
+      dctx.createSubcontext(getUserDNPeople(identity.getName()), container);
+
+    } catch (NamingException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+
+    return true;
+
+  }
+
+  public static boolean addUserOUApp(DirContext dctx, Identity identity, String application) {
+
+    try {
+      Attributes containerApp = new BasicAttributes();
+
+      Attribute objClasses = new BasicAttribute("objectClass");
+      objClasses.add("top");
+      objClasses.add("customApplication");
+      objClasses.add("person");
+      objClasses.add("organizationalPerson");
+      objClasses.add("inetOrgPerson");
+
+
+      Attribute sn = new BasicAttribute("sn", identity.getLastname());
+      Attribute cn = new BasicAttribute("cn", identity.getFirstname() + " " + identity.getLastname() );
+      Attribute givenName = new BasicAttribute("givenName", identity.getFirstname());
+      Attribute uid = new BasicAttribute("uid", identity.getName());
+      Attribute appName = new BasicAttribute("appName", application);
+      Attribute active = new BasicAttribute("active", "true");
+
+
+      containerApp.put(objClasses);
+      containerApp.put(sn);
+      containerApp.put(cn);
+      containerApp.put(givenName);
+      containerApp.put(uid);
+      containerApp.put(appName);
+      containerApp.put(active);
+
+      dctx.createSubcontext(getUserDNApplications(identity.getName(),application), containerApp);
+
+    } catch (NamingException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+
+    return true;
+
+  }
+
+  public static boolean modifyUserRole(DirContext dctx, Identity identity, String application) {
+
+
+    ModificationItem [] mods = new ModificationItem[1];
+
+    try {	
+
+      mods[0] = new ModificationItem(DirContext.ADD_ATTRIBUTE, new BasicAttribute("applrole", application));
+
+
+      dctx.modifyAttributes(getUserDNPeople(identity.getName()), mods);
+    } catch (NamingException e) {
+
+      e.printStackTrace();
+    }
+
+
+    return true;
+
+  }
+
+  public static SearchResult getUser(DirContext dctx, Identity identity, String searchBase) {
+
+    SearchResult result = null;
+    try {
+
+      result = findAccountByAccountName(dctx, searchBase, identity.getName());
+    } catch (NamingException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+
+    return result;
+
+  }
+
+  static SearchResult findAccountByAccountName(DirContext ctx, String ldapSearchBase, String accountName) throws NamingException {
+
+    String searchFilter = "(&(objectClass=person)(uid=" + accountName + "))";
+
+    SearchControls searchControls = new SearchControls();
+    searchControls.setSearchScope(SearchControls.SUBTREE_SCOPE);
+
+    NamingEnumeration<SearchResult> results = ctx.search(ldapSearchBase, searchFilter, searchControls);
+
+    SearchResult searchResult = null;
+    if(results.hasMoreElements()) {
+      searchResult = (SearchResult) results.nextElement();
+
+
+      //make sure there is not another item available, there should be only 1 match
+      if(results.hasMoreElements()) {
+        log.warn("Matched multiple users for the accountName: " + accountName);
+        return null;
+      }
+    }
+    return searchResult;
+  }
+
+  ]]></Source>
+        
+
+</Rule>

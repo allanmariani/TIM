@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Rule language="beanshell" name="Non Human Account Administrator" type="Policy">
+          
+    
+    <Signature returnType="PolicyViolation">
+                    
+        
+        <Inputs>
+                              
+            
+            <Argument name="log">
+                                        
+                
+                <Description>
+          The log object associated with the SailPointContext.
+        </Description>
+                                      
+            
+            </Argument>
+                              
+            
+            <Argument name="context">
+                                        
+                
+                <Description>
+          A sailpoint.api.SailPointContext object that can be used to query the database if necessary.
+        </Description>
+                                      
+            
+            </Argument>
+                              
+            
+            <Argument name="identity">
+                                        
+                
+                <Description>
+          The Identity being inspected.
+        </Description>
+                                      
+            
+            </Argument>
+                              
+            
+            <Argument name="policy">
+                                        
+                
+                <Description>
+          The Policy being evaluated.
+        </Description>
+                                      
+            
+            </Argument>
+                              
+            
+            <Argument name="constraint">
+                                        
+                
+                <Description>
+          The Constraint being evaluated.
+        </Description>
+                                      
+            
+            </Argument>
+                            
+        
+        </Inputs>
+                    
+        
+        <Returns>
+                              
+            
+            <Argument name="violation">
+                                        
+                
+                <Description>
+          The PolicyViolation object.
+        </Description>
+                                      
+            
+            </Argument>
+                            
+        
+        </Returns>
+                  
+    
+    </Signature>
+          
+    
+    <Source><![CDATA[
+  
+import sailpoint.api.SailPointContext;
+import sailpoint.object.Attributes;
+
+import sailpoint.object.Custom;
+import sailpoint.object.Filter;
+import sailpoint.object.Identity;
+import sailpoint.object.QueryOptions;
+import sailpoint.object.Policy;
+import sailpoint.object.PolicyViolation;
+
+import sailpoint.tools.GeneralException;
+import sailpoint.tools.Message;
+import sailpoint.tools.Util;
+
+import java.text.SimpleDateFormat;
+import java.text.DateFormat;
+import java.util.*;
+
+
+serilog=org.apache.commons.logging.LogFactory.getLog("SERI.Rule.Policy.NonHumanAccountAdministrator");
+PolicyViolation v = null;
+
+Locale locale = new Locale("en", "US");     
+
+String type = (String)identity.getAttribute("type");
+if ( ( "rpa".equalsIgnoreCase(type) ) || ("service".equalsIgnoreCase(type)) ) {
+	serilog.debug("found service or bot");
+	
+	Identity administrator = identity.getAdministrator();
+
+    if (administrator != null) {
+       String atype = administrator.getAttribute("type");
+       if ( ("rap".equalsIgnoreCase(type)) || ("service".equalsIgnoreCase(type)) ) {
+          v = new PolicyViolation();
+		  v.setActive(true);
+		  v.setIdentity(identity);
+		  v.setPolicy(policy);
+		  v.setConstraint(constraint);
+		  v.setDescription("NonHuman administrator is NonHuman");
+		  v.setStatus(sailpoint.object.PolicyViolation.Status.Open);
+		  serilog.debug("Policy Violation Returned:" + v.toXml());
+	      return v;
+      }
+   }
+}
+return v;
+
+  ]]></Source>
+        
+
+</Rule>

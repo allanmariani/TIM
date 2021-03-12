@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Rule language="beanshell" name="Privileged Access Management Merge Maps" type="MergeMaps">
+          
+    
+    <Description>
+  This rule merges two maps together. This is used when there are multiple lines that represent the same object, and certain attributes have to merged.
+  </Description>
+          
+    
+    <Signature returnType="Map">
+                    
+        
+        <Inputs>
+                              
+            
+            <Argument name="application">
+                                        
+                
+                <Description>
+          The application associated with the Connector calling the rule.
+        </Description>
+                                      
+            
+            </Argument>
+                              
+            
+            <Argument name="schema">
+                                        
+                
+                <Description>
+          The Schema from the application.
+        </Description>
+                                      
+            
+            </Argument>
+                              
+            
+            <Argument name="current">
+                                        
+                
+                <Description>
+          The current Map object that needs merging.
+        </Description>
+                                      
+            
+            </Argument>
+                              
+            
+            <Argument name="newObject">
+                                        
+                
+                <Description>
+          The new Map object that needs merging.
+        </Description>
+                                      
+            
+            </Argument>
+                              
+            
+            <Argument name="mergeAttrs">
+                                        
+                
+                <Description>
+          A List of the attributes to merge.
+        </Description>
+                                      
+            
+            </Argument>
+                            
+        
+        </Inputs>
+                    
+        
+        <Returns>
+                              
+            
+            <Argument name="map">
+                                        
+                
+                <Description>
+          A Map of the current and new maps, merged according to the attributes list.
+        </Description>
+                                      
+            
+            </Argument>
+                            
+        
+        </Returns>
+                  
+    
+    </Signature>
+          
+    
+    <Source><![CDATA[
+    import sailpoint.tools.Util;
+
+    Map merged = new HashMap();
+
+    if (null == current) {
+        return newObject;
+    }
+    else if ((null == newObject) || Util.isEmpty(newObject)) {
+        return current;
+    }
+
+    for (Map.Entry newEntry : newObject.entrySet()) {
+        String key = newEntry.getKey();
+        Object newValue = newEntry.getValue();
+        Object currentValue = current.get(key);
+
+        // All merged attributes will be turned into lists.
+        if (mergeAttrs.contains(key)) {
+            Object currentVal = current.get(key);
+
+            // If there is no currentValue, just use the new value.
+            Object mergedVal = newValue;
+
+            // If there are two values, put them into a list.
+            if ((null != currentValue) && (null != newValue)) {
+                List mergedList = Util.asList(currentValue);
+                mergedList.addAll(Util.asList(newValue));
+                mergedValue = mergedList;
+            }
+
+            merged.put(key, mergedValue);
+        }
+        else {
+            // This is not a merged value, just use the currentValue (if non-nul);
+            Object mergedValue = currentValue;
+            if (null == currentValue) {
+                mergedValue = newValue;
+            }
+            merged.put(key, mergedValue);
+        }
+    }
+
+    // If there is anything in the currentObject that's not in the new object, use it.
+    for (Map.Entry currentEntry : current.entrySet()) {
+        String key = currentEntry.getKey();
+        if (!merged.containsKey(key)) {
+            merged.put(key, currentEntry.getValue());
+        }
+    }
+
+    return merged;
+  
+  ]]></Source>
+        
+
+</Rule>
