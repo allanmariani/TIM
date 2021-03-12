@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Rule language="beanshell" name="employeeId" type="FieldValue">
+          
+    
+    <Source><![CDATA[return identity.getAttribute("employeeId");]]></Source>
+        
+
+</Rule>

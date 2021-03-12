@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Rule language="beanshell" name="RuleTest Tim" type="BeforeProvisioning">
+          
+    
+    <Description>An IdentityIQ server-side rule that is executed before the connector's provisioning method is called. This gives the customer the ability to customize or react to anything in the ProvisioningPlan BEFORE it is sent to the underlying connectors used in provisioning. 
+
+    This rule will be called for any application found in a plan that also has a configured 'beforeProvisioningRule' configured.  
+
+    The plan can be updated directly in the rule by reference and does not need to return the plan.</Description>
+          
+    
+    <ReferencedRules>
+                    
+        
+        <Reference class="sailpoint.object.Rule" name="Tim-RuleLibrary"/>
+                  
+    
+    </ReferencedRules>
+          
+    
+    <Signature>
+                    
+        
+        <Inputs>
+                              
+            
+            <Argument name="log">
+                                        
+                
+                <Description>
+          The log object associated with the SailPointContext.
+        </Description>
+                                      
+            
+            </Argument>
+                              
+            
+            <Argument name="context">
+                                        
+                
+                <Description>
+          A sailpoint.api.SailPointContext object that can be used to query the database if necessary.
+        </Description>
+                                      
+            
+            </Argument>
+                              
+            
+            <Argument name="plan">
+                                        
+                
+                <Description>
+          The ProvisioningPlan object on its way to the Connector.
+        </Description>
+                                      
+            
+            </Argument>
+                              
+            
+            <Argument name="application">
+                                        
+                
+                <Description>
+          The application object that references this before/after script.
+        </Description>
+                                      
+            
+            </Argument>
+                            
+        
+        </Inputs>
+                  
+    
+    </Signature>
+          
+    
+    <Source><![CDATA[
+
+
+  Identity identity = context.getObjectByName(Identity.class,"Aaron.Nichols");
+
+
+  // Verifica se o usuario já existe
+
+  SearchResult result = findAccountByAccountName(getDirContext(), "ou=People,dc=lab,dc=netbr", identity.getName());
+
+  if(result !=null){
+
+    log.warn("---------------[Existe usuario]------------------");
+    
+    modifyUserRole(getDirContext(), identity, "TRAKK");
+    addUserOUApp(getDirContext(), identity, "TRAKK");
+      
+      
+  }else{
+    log.warn("---------------[NAO Existe usuario]------------------");
+
+    addUser(getDirContext(), identity, "PRISM");
+    addUserOUApp(getDirContext(), identity, "PRISM");
+
+
+  }
+
+  //		  return result.getAttributes().get("cn").toString();
+
+
+  ]]></Source>
+        
+
+</Rule>

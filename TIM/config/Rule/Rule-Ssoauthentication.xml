@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Rule language="beanshell" name="SSOAuthentication" type="SSOAuthentication">
+          
+    
+    <Description>A rule used to perform SSO authentication.</Description>
+          
+    
+    <Signature returnType="SailPointObject">
+                    
+        
+        <Inputs>
+                              
+            
+            <Argument name="log">
+                                        
+                
+                <Description>
+          The log object associated with the SailPointContext.
+        </Description>
+                                      
+            
+            </Argument>
+                              
+            
+            <Argument name="context">
+                                        
+                
+                <Description>
+          A sailpoint.api.SailPointContext object that can be used to query the database if necessary.
+        </Description>
+                                      
+            
+            </Argument>
+                              
+            
+            <Argument name="httpRequest">
+                                        
+                
+                <Description>
+          A javax.servlet.http.HttpServletRequest object containing the SSO data.
+        </Description>
+                                      
+            
+            </Argument>
+                            
+        
+        </Inputs>
+                    
+        
+        <Returns>
+                              
+            
+            <Argument name="identity Or Link">
+                                        
+                
+                <Description>
+          The Identity or Link that has been authenticated via SSO.
+          Starting in 6.1 this rule can return either the Identity or
+          the specific Link that was used to authenticate the user.  
+          Returning the Link is the preferred way as it provides the
+          exact account back to the server side which can be helpful
+          when collecting authentication for electronic signatures.
+        </Description>
+                                      
+            
+            </Argument>
+                            
+        
+        </Returns>
+                  
+    
+    </Signature>
+          
+    
+    <Source><![CDATA[fsefefe]]></Source>
+        
+
+</Rule>

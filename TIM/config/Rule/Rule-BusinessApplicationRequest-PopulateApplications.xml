@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Rule language="beanshell" name="Business Application Request - populate applications" type="Correlation">
+          
+    
+    <Source><![CDATA[
+import com.iiqpluginapplicationrequest.rest.ApplicationRequestResource;
+import java.util.*;
+import sailpoint.object.Application;
+
+System.out.println("Starting Business Application Request - populate applications");
+ApplicationRequestResource appReqRessource = new ApplicationRequestResource();
+ArrayList applications = context.getObjects(Application.class);
+for(Application application : applications){
+  if(appReqRessource.getApplication(application.getName())==null){
+    HashMap map = new HashMap();
+    map.put("name",application.getName());
+    map.put("type","Application");
+    map.put("link","/identityiq/ui/rest/redirect?rp1=/accessRequest/accessRequest.jsf&rp2=accessRequest/manageAccess/add%3FfilterEntitlementApplication=" + application.getName());
+    map.put("description","Access to the " + application.getName() + " application.");
+    Object app = appReqRessource.addApplicationWS(map);
+    if(object!=null){
+      System.out.println("Created a new application launcher for " + application.getName());
+    }
+  }else{
+    System.out.println("Application  " + application.getName() + " already existing");
+  }
+}
+System.out.println("Ending Business Application Request - populate applications");  
+  ]]></Source>
+        
+
+</Rule>

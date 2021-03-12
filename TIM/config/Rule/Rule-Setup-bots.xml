@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Rule language="beanshell" name="Setup-Bots" type="TaskEventRule">
+          
+    
+    <Description>A rule used to inject logic at a particular stage in the Task
+        execution process.</Description>
+          
+    
+    <Signature returnType="Map">
+                    
+        
+        <Inputs>
+                              
+            
+            <Argument type="taskResult">
+                                        
+                
+                <Description>
+The current task result object.
+</Description>
+                                      
+            
+            </Argument>
+                              
+            
+            <Argument type="event">
+                                        
+                
+                <Description>
+The TaskEvent object
+</Description>
+                                      
+            
+            </Argument>
+                            
+        
+        </Inputs>
+                    
+        
+        <Returns>
+                              
+            
+            <Argument type="taskResult">
+                                        
+                
+                <Description>
+The resulting task result object, or null if no
+              update is required.
+</Description>
+                                      
+            
+            </Argument>
+                            
+        
+        </Returns>
+                  
+    
+    </Signature>
+          
+    
+    <Source><![CDATA[
+import sailpoint.tools.Util;
+import sailpoint.server.Importer;
+import sailpoint.object.Identity;
+
+Identity admin = context.getObjectByName(Identity.class,"Barbara.Wilson");
+if (admin != null) {
+   Identity b1 = context.getObjectByName(Identity.class,"inv_processing_bot1");
+   if (b1 != null) {
+      b1.setAdministrator(admin);
+      context.saveObject(b1);
+      context.commitTransaction();
+   }
+   
+   Identity b2 = context.getObjectByName(Identity.class,"invoice_creator_bot1");
+   if (b2 != null) {
+      b2.setAdministrator(admin);
+      context.saveObject(b2);
+      context.commitTransaction();
+   }
+   
+   Identity b3 = context.getObjectByName(Identity.class,"invoice_processor_bot1");
+   if (b3 != null) {
+      b3.setAdministrator(admin);
+      context.saveObject(b3);
+      context.commitTransaction();
+   }
+   
+   Identity b4 = context.getObjectByName(Identity.class,"invoice_processor_bot2");
+   if (b4 != null) {
+      b4.setAdministrator(admin);
+      context.saveObject(b4);
+      context.commitTransaction();
+   }
+
+}
+
+  ]]></Source>
+        
+
+</Rule>
