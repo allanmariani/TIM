@@ -1,0 +1,1384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Workflow PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Workflow explicitTransitions="true" name="TIM-Workflow-GerenciarUsuarios" type="IdentityLifecycle">
+          
+    
+    <Variable input="true" name="launcher"/>
+          
+    
+    <Variable initializer="true" name="transient"/>
+          
+    
+    <Variable name="uidNumber"/>
+          
+    
+    <Variable name="isEstrangeiro"/>
+          
+    
+    <Variable name="cpf"/>
+          
+    
+    <Variable name="passaporte"/>
+          
+    
+    <Variable name="nomeCompleto"/>
+          
+    
+    <Variable name="dataNascimento"/>
+          
+    
+    <Variable name="telefone"/>
+          
+    
+    <Variable name="emailExterno"/>
+          
+    
+    <Variable name="gestorTIM"/>
+          
+    
+    <Variable name="responsavelExterno"/>
+          
+    
+    <Variable name="empresaExterna"/>
+          
+    
+    <Variable name="empresaTIM"/>
+          
+    
+    <Variable name="areaTIM"/>
+          
+    
+    <Variable name="numeroContrato"/>
+          
+    
+    <Variable name="tipoUsuario"/>
+          
+    
+    <Variable name="dataAdmissao"/>
+          
+    
+    <Variable name="dataDesligamento"/>
+          
+    
+    <Variable name="terminalLinux"/>
+          
+    
+    <Variable name="emailTIM"/>
+          
+    
+    <Variable name="statusUsuario"/>
+          
+    
+    <Variable name="realizadoPor"/>
+          
+    
+    <Variable name="descricao"/>
+          
+    
+    <Variable name="tipoAcao"/>
+          
+    
+    <Variable name="Exception"/>
+          
+    
+    <Variable initializer="true" name="trace"/>
+          
+    
+    <Variable name="dataModificacao"/>
+          
+    
+    <Variable name="identityName"/>
+          
+    
+    <Variable name="dataCriacao"/>
+          
+    
+    <Variable name="TIMLogin"/>
+          
+    
+    <Variable name="situacaoUsuario"/>
+          
+    
+    <Step icon="Start" name="Start" posX="17" posY="24">
+                    
+        
+        <Transition to="Form Terceiros"/>
+                  
+    
+    </Step>
+          
+    
+    <Step icon="Stop" name="Stop" posX="1063" posY="349"/>
+          
+    
+    <Step icon="Analysis" name="Form Terceiros" posX="92" posY="174">
+                    
+        
+        <Approval name="TIM-Form-GerenciarUsuarios-Terceiros" owner="ref:launcher" return="uidNumber, isEstrangeiro, cpf, passaporte, nomeCompleto, dataNascimento, telefone, emailExterno, gestorTIM, responsavelExterno, empresaExterna, empresaTIM, areaTIM, numeroContrato, tipoUsuario, dataAdmissao, dataDesligamento, terminalLinux, emailTIM, statusUsuario, realizadoPor, descricao, tipoAcao, idUsuario, situacaoUsuario" send="launcher, empresasCecred, empresasUnicred, empresasTerceiros, areasCecred, areasUnicred">
+                              
+            
+            <Form name="TIM-Form-GerenciarUsuarios-Terceiros">
+                                        
+                
+                <Attributes>
+                                                  
+                    
+                    <Map>
+                                                            
+                        
+                        <entry key="isWizard" value="true"/>
+                                                            
+                        
+                        <entry key="pageTitle" value="TIM-Form-GerenciarUsuarios-Terceiros"/>
+                                                            
+                        
+                        <entry key="title" value="Gerenciamento de Usuários - Terceiros"/>
+                                                          
+                    
+                    </Map>
+                                                
+                
+                </Attributes>
+                                        
+                
+                <FormRef name="TIM-Form-GerenciarUsuarios-Terceiros"/>
+                                      
+            
+            </Form>
+                            
+        
+        </Approval>
+                    
+        
+        <ConditionScript>
+                              
+            
+            <Source><![CDATA[
+                                
+                
+                                
+                
+
+        if (quickLink.equals("TIM-Quicklink-GerenciarUsuarios-Terceiros")) {
+        return true;
+        }
+
+      
+                            
+            
+                            
+            ]]></Source>
+                            
+        
+        </ConditionScript>
+                    
+        
+        <Transition to="Form Impessoais"/>
+                  
+    
+    </Step>
+          
+    
+    <Step icon="Analysis" name="Form Impessoais" posX="177" posY="27">
+                    
+        
+        <Approval name="TIM-Form-GerenciarUsuarios-Impessoais" owner="ref:launcher" return="uidNumber, isEstrangeiro, cpf, passaporte, TIMLogin, dataCriacao, gestorTIM, empresaTIM, areaTIM, tipoUsuario, terminalLinux, emailTIM, statusUsuario, tipoAcao, idUsuario, situacaoUsuario" send="launcher">
+                              
+            
+            <Form name="TIM-Form-GerenciarUsuarios-Impessoais">
+                                        
+                
+                <Attributes>
+                                                  
+                    
+                    <Map>
+                                                            
+                        
+                        <entry key="isWizard" value="true"/>
+                                                            
+                        
+                        <entry key="pageTitle" value="TIM-Form-GerenciarUsuarios-Impessoais"/>
+                                                            
+                        
+                        <entry key="title" value="Gerenciamento de Usuários - Impessoais"/>
+                                                          
+                    
+                    </Map>
+                                                
+                
+                </Attributes>
+                                        
+                
+                <FormRef name="TIM-Form-GerenciarUsuarios-Impessoais"/>
+                                      
+            
+            </Form>
+                            
+        
+        </Approval>
+                    
+        
+        <ConditionScript>
+                              
+            
+            <Source><![CDATA[
+                                
+                
+                                
+                
+
+        if (quickLink.equals("TIM-Quicklink-GerenciarUsuarios-Impessoais")) {
+        return true;
+        }
+
+      
+                            
+            
+                            
+            ]]></Source>
+                            
+        
+        </ConditionScript>
+                    
+        
+        <Transition to="Variables Parser"/>
+                  
+    
+    </Step>
+          
+    
+    <Step icon="Provision" name="Insert" posX="633" posY="28" wait="1">
+                    
+        
+        <Script>
+                              
+            
+            <Source><![CDATA[
+                                
+                
+                                
+                  import sailpoint.object.*;
+        import java.sql.*;
+
+        Application application = context.getObjectByName(Application.class, "TIM Terceiros");
+
+        String user = application.getAttributeValue("user");
+        String password = context.decrypt(application.getAttributeValue("password"));
+        String driverClass =  application.getAttributeValue("driverClass");
+        String url =  application.getAttributeValue("url");
+      
+        String insertStatement = "INSERT INTO TIM_TERCEIROS values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        Statement statement = null;
+        Connection connection = null;
+
+        try {
+
+        Class.forName(driverClass);
+
+        connection = DriverManager.getConnection(url ,user, password);
+        connection.setAutoCommit(false);
+
+        statement = connection.prepareStatement(insertStatement);
+
+        if(uidNumber != null && uidNumber != void) {
+        statement.setInt( 1, Integer.parseInt(uidNumber));
+        }
+        else {
+        statement.setNull(1,java.sql.Types.INTEGER);
+        }
+
+        if(isEstrangeiro != null && isEstrangeiro != void) {
+        statement.setInt( 2, Integer.parseInt(isEstrangeiro));
+        }
+        else {
+        statement.setNull(2,java.sql.Types.INTEGER);
+        }
+
+        if(cpf != null && cpf != void) {
+        statement.setString( 3, cpf);
+        }
+        else {
+        statement.setNull(3,java.sql.Types.VARCHAR);
+        }
+
+        if(passaporte != null && passaporte != void) {
+        statement.setString( 4, passaporte);
+        }
+        else {
+        statement.setNull(4,java.sql.Types.VARCHAR);
+        }
+
+        if(nomeCompleto != null && nomeCompleto != void) {
+        statement.setString( 5, nomeCompleto);
+        }
+        else {
+        statement.setNull(5,java.sql.Types.VARCHAR);
+        }
+
+        if(dataNascimento != null && dataNascimento != void) {
+        statement.setDate( 6, new java.sql.Date(dataNascimento.getTime()));
+        }
+        else {
+        statement.setNull(6,java.sql.Types.DATE);
+        }
+
+        if(telefone != null && telefone != void) {
+        statement.setString( 7, telefone);
+        }
+        else {
+        statement.setNull(7,java.sql.Types.VARCHAR);
+        }
+
+        if(emailExterno != null && emailExterno != void) {
+        statement.setString( 8, emailExterno);
+        }
+        else {
+        statement.setNull(8,java.sql.Types.VARCHAR);
+        }
+
+        if(gestorTIM != null && gestorTIM != void) {
+        statement.setString( 9, gestorTIM);
+        }
+        else {
+        statement.setNull(9,java.sql.Types.VARCHAR);
+        }
+
+        if(responsavelExterno != null && responsavelExterno != void) {
+        statement.setString( 10, responsavelExterno);
+        }
+        else {
+        statement.setNull(10,java.sql.Types.VARCHAR);
+        }
+
+        if(empresaExterna != null && empresaExterna != void) {
+        statement.setString( 11, empresaExterna);
+        }
+        else {
+        statement.setNull(11,java.sql.Types.VARCHAR);
+        }
+
+        if(empresaTIM != null && empresaTIM != void) {
+        statement.setString( 12, empresaTIM);
+        }
+        else {
+        statement.setNull(12, java.sql.Types.VARCHAR);
+        }
+
+        if(areaTIM != null && areaTIM != void) {
+        statement.setString( 13, areaTIM);
+        }
+        else {
+        statement.setNull(13,java.sql.Types.VARCHAR);
+        }
+
+        if(numeroContrato != null && numeroContrato != void) {
+        statement.setString( 14, numeroContrato);
+        }
+        else {
+        statement.setNull(14,java.sql.Types.VARCHAR);
+        }
+
+        if(tipoUsuario != null && tipoUsuario != void) {
+        statement.setString( 15, tipoUsuario);
+        }
+        else {
+        statement.setNull(15,java.sql.Types.VARCHAR);
+        }
+
+        if(dataAdmissao != null && dataAdmissao != void) {
+        statement.setDate( 16, new java.sql.Date(dataAdmissao.getTime()));
+        }
+        else {
+        statement.setNull(16,java.sql.Types.DATE);
+        }
+
+        if(dataDesligamento != null && dataDesligamento != void) {
+        statement.setDate( 17, new java.sql.Date(dataDesligamento.getTime()));
+        }
+        else {
+        statement.setNull(17,java.sql.Types.DATE);
+        }
+
+        if(terminalLinux != null && terminalLinux != void) {
+        statement.setInt( 18, Integer.parseInt(terminalLinux));
+        }
+        else {
+        statement.setNull(18,java.sql.Types.INTEGER);
+        }
+
+        if(emailTIM != null && emailTIM != void) {
+        statement.setInt( 19, Integer.parseInt(emailTIM));
+        }
+        else {
+        statement.setNull(19,java.sql.Types.INTEGER);
+        }
+
+        if(statusUsuario != null && statusUsuario != void) {
+        statement.setString( 20, statusUsuario);
+        }
+        else {
+        statement.setNull(20,java.sql.Types.VARCHAR);
+        }
+
+        if(dataModificacao != null && dataModificacao != void) {
+        statement.setDate( 21, new java.sql.Date(dataModificacao));
+        }
+        else {
+        statement.setNull(21,java.sql.Types.DATE);
+        }
+
+        if(realizadoPor != null && realizadoPor != void) {
+        statement.setString( 22, realizadoPor);
+        }
+        else {
+        statement.setNull(22,java.sql.Types.VARCHAR);
+        }
+
+        if(descricao != null && descricao != void) {
+        statement.setString( 23, descricao);
+        }
+        else {
+        statement.setNull(23,java.sql.Types.VARCHAR);
+        }
+
+        if(situacaoUsuario != null && situacaoUsuario != void) {
+        statement.setString( 24, situacaoUsuario );
+        }
+        else {
+        statement.setNull(24,java.sql.Types.VARCHAR);
+        }
+
+        statement.executeUpdate();
+        connection.commit();
+        }
+        catch(Exception e) {
+        log.warn(e.getMessage());
+        wfcontext.setVariable("Exception", e.getMessage());
+        connection.rollback();
+
+        } finally {
+
+        if(statement != null) {
+        statement.close();
+        }
+
+        if(connection != null) {
+        connection.close();
+        }
+        }
+      
+                            
+            
+                            
+            ]]></Source>
+                            
+        
+        </Script>
+                    
+        
+        <Transition to="Create Identity">
+                              
+            
+            <Script>
+                                        
+                
+                <Source><![CDATA[
+                                        
+                    
+                                        
+                    if (Exception == null || Exception == void) {
+          return true;
+          }
+
+          return false;
+
+        
+                                    
+                
+                                    
+                ]]></Source>
+                                      
+            
+            </Script>
+                            
+        
+        </Transition>
+                    
+        
+        <Transition to="ErrorHandling - Insert">
+                              
+            
+            <Script>
+                                        
+                
+                <Source><![CDATA[
+                                        
+                    
+                                        
+                    if (Exception != null && Exception != void) {
+          return true;
+          }
+
+          return false;
+                                    
+                
+                                    
+                ]]></Source>
+                                      
+            
+            </Script>
+                            
+        
+        </Transition>
+                  
+    
+    </Step>
+          
+    
+    <Step icon="Provision" name="Update" posX="485" posY="174" wait="1">
+                    
+        
+        <Script>
+                              
+            
+            <Source><![CDATA[
+                                
+                
+                                
+                
+
+        import sailpoint.object.*;
+        import java.sql.*;
+
+        Application application = context.getObjectByName(Application.class, "TIM Terceiros");
+
+        String user = application.getAttributeValue("user");
+        String password = context.decrypt(application.getAttributeValue("password"));
+        String driverClass =  application.getAttributeValue("driverClass");
+        String url =  application.getAttributeValue("url");
+
+        String updateStatement = "UPDATE TIM_TERCEIROS SET TIM_ESTRANGEIRO=?, TIM_CPF=?, TIM_PASSAPORTE=?, TIM_NOME=?, TIM_DATA_NASCIMENTO=?, 			TIM_TELEFONE=?, TIM_EMAIL_EXTERNO=?, TIM_RESPONSAVEL_TIM=?,	TIM_RESPONSAVEL_EXTERNO=?, TIM_EMPRESA_EXTERNA=?, TIM_EMPRESA_TIM=?, TIM_AREA=?, TIM_CONTRATO=?, TIM_TIPO_USUARIO=?, TIM_DATA_ADMISSAO=?, TIM_DATA_DESLIGAMENTO=?, TIM_TERMINAL_LINUX=?, TIM_POSSUI_EMAIL_TIM=?,  TIM_STATUS=?, TIM_DATA_MODIFICACAO=?, TIM_REALIZADO_POR=?, TIM_DESCRICAO=?, TIM_SITUACAO=?  WHERE TIM_UIDNUMBER=? ";
+
+        Statement statement = null;
+        Connection connection = null;
+
+        try {
+
+        Class.forName(driverClass);
+
+        connection = DriverManager.getConnection(url ,user, password);
+        connection.setAutoCommit(false);
+
+        statement = connection.prepareStatement(updateStatement);
+
+
+        statement.setInt( 24, Integer.parseInt(uidNumber));
+
+
+        if(isEstrangeiro != null && isEstrangeiro != void) {
+        statement.setInt( 1, Integer.parseInt(isEstrangeiro));
+        }
+        else {
+        statement.setNull(1,java.sql.Types.INTEGER);
+        }
+
+        if(cpf != null && cpf != void) {
+        statement.setString( 2, cpf);
+        }
+        else {
+        statement.setNull(2,java.sql.Types.VARCHAR);
+        }
+
+        if(passaporte != null && passaporte != void) {
+        statement.setString( 3, passaporte);
+        }
+        else {
+        statement.setNull(3,java.sql.Types.VARCHAR);
+        }
+
+        if(nomeCompleto != null && nomeCompleto != void) {
+        statement.setString( 4, nomeCompleto);
+        }
+        else {
+        statement.setNull(4,java.sql.Types.VARCHAR);
+        }
+
+        if(dataNascimento != null && dataNascimento != void) {
+        statement.setDate( 5, new java.sql.Date(dataNascimento.getTime()));
+        }
+        else {
+        statement.setNull(5,java.sql.Types.DATE);
+        }
+
+        if(telefone != null && telefone != void) {
+        statement.setString( 6, telefone);
+        }
+        else {
+        statement.setNull(6,java.sql.Types.VARCHAR);
+        }
+
+        if(emailExterno != null && emailExterno != void) {
+        statement.setString( 7, emailExterno);
+        }
+        else {
+        statement.setNull(7,java.sql.Types.VARCHAR);
+        }
+
+        if(gestorTIM != null && gestorTIM != void) {
+        statement.setString( 8, gestorTIM);
+        }
+        else {
+        statement.setNull(8,java.sql.Types.VARCHAR);
+        }
+
+        if(responsavelExterno != null && responsavelExterno != void) {
+        statement.setString( 9, responsavelExterno);
+        }
+        else {
+        statement.setNull(9,java.sql.Types.VARCHAR);
+        }
+
+        if(empresaExterna != null && empresaExterna != void) {
+        statement.setString( 10, empresaExterna);
+        }
+        else {
+        statement.setNull(10,java.sql.Types.VARCHAR);
+        }
+
+        if(empresaTIM != null && empresaTIM != void) {
+        statement.setString( 11, empresaTIM);
+        }
+        else {
+        statement.setNull(11, java.sql.Types.VARCHAR);
+        }
+
+        if(areaTIM != null && areaTIM != void) {
+        statement.setString( 12, areaTIM);
+        }
+        else {
+        statement.setNull(12,java.sql.Types.VARCHAR);
+        }
+
+        if(numeroContrato != null && numeroContrato != void) {
+        statement.setString( 13, numeroContrato);
+        }
+        else {
+        statement.setNull(13,java.sql.Types.VARCHAR);
+        }
+
+        if(tipoUsuario != null && tipoUsuario != void) {
+        statement.setString( 14, tipoUsuario);
+        }
+        else {
+        statement.setNull(14,java.sql.Types.VARCHAR);
+        }
+
+        if(dataAdmissao != null && dataAdmissao != void) {
+        statement.setDate( 15, new java.sql.Date(dataAdmissao.getTime()));
+        }
+        else {
+        statement.setNull(15,java.sql.Types.DATE);
+        }
+
+        if(dataDesligamento != null && dataDesligamento != void) {
+        statement.setDate( 16, new java.sql.Date(dataDesligamento));
+        }
+        else {
+        statement.setNull(16,java.sql.Types.DATE);
+        }
+
+        if(terminalLinux != null && terminalLinux != void) {
+        statement.setInt( 17, Integer.parseInt(terminalLinux));
+        }
+        else {
+        statement.setNull(17,java.sql.Types.INTEGER);
+        }
+
+        if(emailTIM != null && emailTIM != void) {
+        statement.setInt( 18, Integer.parseInt(emailTIM));
+        }
+        else {
+        statement.setNull(18,java.sql.Types.INTEGER);
+        }
+
+        if(statusUsuario != null && statusUsuario != void) {
+        statement.setString( 19, statusUsuario);
+        }
+        else {
+        statement.setNull(19,java.sql.Types.VARCHAR);
+        }
+
+        if(dataModificacao != null && dataModificacao != void) {
+        statement.setDate( 20, new java.sql.Date(dataModificacao));
+        }
+        else {
+        statement.setNull(20,java.sql.Types.DATE);
+        }
+
+        if(realizadoPor != null && realizadoPor != void) {
+        statement.setString( 21, realizadoPor);
+        }
+        else {
+        statement.setNull(21,java.sql.Types.VARCHAR);
+        }
+
+        if(descricao != null && descricao != void) {
+        statement.setString( 22, descricao);
+        }
+        else {
+        statement.setNull(22,java.sql.Types.VARCHAR);
+        }
+
+ if(situacaoUsuario != null && situacaoUsuario != void) {
+        statement.setString( 23, situacaoUsuario );
+        }
+        else {
+        statement.setNull(23,java.sql.Types.VARCHAR);
+        }
+
+        statement.executeUpdate();
+        connection.commit();
+        }
+        catch(Exception e) {
+        log.warn(e.getMessage());
+        wfcontext.setVariable("Exception", e.getMessage());
+        connection.rollback();
+
+        } finally {
+
+        if(statement != null) {
+        statement.close();
+        }
+
+        if(connection != null) {
+        connection.close();
+        }
+        }
+      
+                            
+            
+                            
+            ]]></Source>
+                            
+        
+        </Script>
+                    
+        
+        <Transition to="Aggregation">
+                              
+            
+            <Script>
+                                        
+                
+                <Source><![CDATA[
+                                        
+                    
+                                        
+                    if (Exception == null || Exception == void) {
+          return true;
+}
+                                    
+                
+                                    
+                ]]></Source>
+                                      
+            
+            </Script>
+                            
+        
+        </Transition>
+                    
+        
+        <Transition to="ErrorHandling - Update">
+                              
+            
+            <Script>
+                                        
+                
+                <Source><![CDATA[
+                                        
+                    
+                                        
+                    if (Exception != null && Exception != void) {
+          return true;
+          }
+
+          return false;
+                                    
+                
+                                    
+                ]]></Source>
+                                      
+            
+            </Script>
+                            
+        
+        </Transition>
+                  
+    
+    </Step>
+          
+    
+    <Step icon="Catches" name="ErrorHandling - Update" posX="629" posY="341">
+                    
+        
+        <Script>
+                              
+            
+            <Source><![CDATA[
+                                
+                
+                                
+                import sailpoint.tools.*;
+
+        String Exception = wfcontext.getVariable("Exception");
+
+        Message msg = new Message(Message.Type.Warn, "Gerenciar Terceiros " + Exception,new Object[] {});  
+        wfcontext.getWorkflowCase().addMessage(msg);
+      
+                            
+            
+                            
+            ]]></Source>
+                            
+        
+        </Script>
+                    
+        
+        <Transition to="Stop"/>
+                  
+    
+    </Step>
+          
+    
+    <Step icon="Task" name="Aggregation" posX="726" posY="188">
+                    
+        
+        <Script>
+                              
+            
+            <Source><![CDATA[
+                                
+                
+                                
+                  import sailpoint.object.*; 
+
+        try {
+        singleAccountAggregation("TIM Terceiros", uidNumber);
+        }
+        catch (Exception e)
+        {
+        log.warn("GerenciarTerceiros AccountAggregation Step: " + e);
+        }
+
+
+      
+                            
+            
+                            
+            ]]></Source>
+                            
+        
+        </Script>
+                    
+        
+        <Transition to="Identity Refresh"/>
+                  
+    
+    </Step>
+          
+    
+    <Step action="refreshIdentity" icon="Task" name="Identity Refresh" posX="911" posY="168">
+                    
+        
+        <Arg name="identityName">
+                              
+            
+            <Script>
+                                        
+                
+                <Source><![CDATA[
+                                        
+                    
+                                        
+                             import sailpoint.object.*;
+
+          String identityName = null;
+
+          QueryOptions queryOptions = new QueryOptions();
+          queryOptions.addFilter(Filter.eq("TIM_uidNumber", uidNumber));
+
+          Iterator iterator = context.search(Identity.class, queryOptions);
+
+          while (iterator.hasNext()) {
+          Object thisObject = iterator.next();
+          identityName = thisObject.getName();
+          }
+          sailpoint.tools.Util.flushIterator(iterator);
+
+          return identityName;
+                                    
+                
+                                    
+                ]]></Source>
+                                      
+            
+            </Script>
+                            
+        
+        </Arg>
+                    
+        
+        <Arg name="provision" value="false"/>
+                    
+        
+        <Arg name="promoteAttributes" value="true"/>
+                    
+        
+        <Arg name="processTriggers" value="true"/>
+                    
+        
+        <Arg name="correlateEntitlements" value="false"/>
+                    
+        
+        <Arg name="refreshManagerStatus" value="true"/>
+                    
+        
+        <Arg name="synchronizeAttributes" value="false"/>
+                    
+        
+        <Arg name="flow" value="Gerenciar Usuarios"/>
+                    
+        
+        <Transition to="Identity Refresh - Sync"/>
+                  
+    
+    </Step>
+          
+    
+    <Step icon="Approval" name="Response" posX="324" posY="30">
+                    
+        
+        <Approval name="Response" owner="ref:launcher" return="" send="">
+                              
+            
+            <Form name="Response">
+                                        
+                
+                <Attributes>
+                                                  
+                    
+                    <Map>
+                                                            
+                        
+                        <entry key="pageTitle" value="Response"/>
+                                                          
+                    
+                    </Map>
+                                                
+                
+                </Attributes>
+                                        
+                
+                <Section name="Section 1">
+                                                  
+                    
+                    <Field displayName="Informação" displayOnly="true" name="info" type="string" value="A sua solicitação foi submetida! "/>
+                                                
+                
+                </Section>
+                                        
+                
+                <Button action="next" label="Ok"/>
+                                      
+            
+            </Form>
+                            
+        
+        </Approval>
+                    
+        
+        <Transition to="Insert">
+                              
+            
+            <Script>
+                                        
+                
+                <Source><![CDATA[
+                                        
+                    
+                                        
+                    if ("Incluir Usuário".equals(tipoAcao)) {
+          return true;
+          }
+
+        
+                                    
+                
+                                    
+                ]]></Source>
+                                      
+            
+            </Script>
+                            
+        
+        </Transition>
+                    
+        
+        <Transition to="Update">
+                              
+            
+            <Script>
+                                        
+                
+                <Source><![CDATA[
+                                        
+                    
+                                        
+                    if ("Alterar Usuário".equals(tipoAcao)) {
+          return true;
+          }
+        
+                                    
+                
+                                    
+                ]]></Source>
+                                      
+            
+            </Script>
+                            
+        
+        </Transition>
+                  
+    
+    </Step>
+          
+    
+    <Step icon="Catches" name="ErrorHandling - Insert" posX="893" posY="27">
+                    
+        
+        <Script>
+                              
+            
+            <Source><![CDATA[
+                                
+                
+                                
+                import sailpoint.tools.*;
+
+        String Exception = wfcontext.getVariable("Exception");
+
+        Message msg = new Message(Message.Type.Warn, "Gerenciar Terceiros " + Exception,new Object[] {});  
+        wfcontext.getWorkflowCase().addMessage(msg);
+                            
+            
+                            
+            ]]></Source>
+                            
+        
+        </Script>
+                    
+        
+        <Transition to="Stop"/>
+                  
+    
+    </Step>
+          
+    
+    <Step icon="Task" name="Variables Parser" posX="241" posY="175">
+                    
+        
+        <Script>
+                              
+            
+            <Source><![CDATA[
+
+if ("SOFTWARE".equals(tipoUsuario) || "RPA".equals(tipoUsuario)) {
+	nomeCompleto = TIMLogin;
+}
+
+Identity identity = context.getObjectByName(Identity.class, launcher);
+
+if (identity != null && identity !=void) {
+	realizadoPor = identity.getName();
+	context.decache(identity);
+}
+
+if ("Sim".equals(isEstrangeiro)) {
+	isEstrangeiro = "1";
+	cpf = null;
+}
+else {
+	isEstrangeiro = "0";
+	passaporte = null;
+}
+
+if ("Sim".equals(terminalLinux)) {
+	terminalLinux= "1";
+}
+else {
+	terminalLinux= "0";
+}
+
+if ("Sim".equals(emailTIM)) {
+	emailTIM= "1";
+}
+else {
+	emailTIM= "0";
+}
+
+//O campo empresaExterna só deve ser preenchido para tipoUsuario=TERCEIRO
+if (!tipoUsuario.equals("TERCEIRO")) {
+	empresaExterna = null;
+	responsavelExterno = null;
+}
+
+if (empresaExterna != null && empresaExterna != void) {
+	QueryOptions queryOptions = new QueryOptions();
+	queryOptions.addFilter(Filter.eq("value", empresaExterna));
+
+	Iterator iterator = context.search(ManagedAttribute.class, queryOptions);
+
+	while (iterator.hasNext()) {
+		empresaExterna = iterator.next().getDisplayName(); 
+	}
+	sailpoint.tools.Util.flushIterator(iterator);
+}
+
+if (empresaTIM != null && empresaTIM != void) {
+	QueryOptions queryOptions = new QueryOptions();
+	queryOptions.addFilter(Filter.eq("value", empresaTIM ));
+
+	Iterator iterator = context.search(ManagedAttribute.class, queryOptions);
+
+	while (iterator.hasNext()) {
+		empresaTIM = iterator.next().getDisplayName(); 
+	}
+	sailpoint.tools.Util.flushIterator(iterator);
+}
+
+if (areaTIM != null && areaTIM != void) {
+	QueryOptions queryOptions = new QueryOptions();
+	queryOptions.addFilter(Filter.eq("value", areaTIM ));
+
+	Iterator iterator = context.search(ManagedAttribute.class, queryOptions);
+
+	while (iterator.hasNext()) {
+		areaTIM = iterator.next().getDisplayName(); 
+	}
+	sailpoint.tools.Util.flushIterator(iterator);
+}
+
+dataModificacao = System.currentTimeMillis();
+
+Identity gestor = context.getObjectById(Identity.class, gestorTIM);
+if (gestor != null && gestor != void) {
+	gestorTIM = gestor.getAttribute("TIM_matricula");
+	context.decache(gestor);
+}
+
+
+//Reserva um novo uidNumber ou reutiliza se o usuário já estiver na base
+QueryOptions queryOptions = new QueryOptions();
+
+if (cpf != null && cpf != void) {
+	queryOptions.addFilter(Filter.eq("cpf", cpf));
+}
+
+if (passaporte != null && passaporte != void) {
+	queryOptions.addFilter(Filter.eq("TIM_passaporte", passaporte));
+}
+
+if (TIMLogin != null && TIMLogin != void) {
+	queryOptions.addFilter(Filter.eq("TIM_login", TIMLogin));
+}
+
+if (!queryOptions.getFilters().isEmpty()) {
+
+	Iterator iterator = context.search(Identity.class, queryOptions);
+	while (iterator.hasNext()) {
+		thisObject = iterator.next();
+		uidNumber = thisObject.getAttribute("TIM_uidNumber");
+	}
+	sailpoint.tools.Util.flushIterator(iterator);
+
+}
+
+if (uidNumber == null || uidNumber == void) {
+	uidNumber = getNextUidNumber();
+}
+
+//O campo dataDesligamento deve ser atualizado quando statusUsuario=DESLIGADO e TIM_data_desligamento=NULL
+if (statusUsuario.equals("DESLIGADO")) {
+	Identity identity = context.getObjectByName(Identity.class, identityName);
+	if (identity != null && identity != void) {
+		dataDesligamento = identity.getAttribute("TIM_data_desligamento");
+		context.decache(identity);
+	}
+	if (dataDesligamento == null || dataDesligamento == void) {
+		dataDesligamento = System.currentTimeMillis();
+	} else {
+		dataDesligamento = dataDesligamento.getTime();
+	}
+}
+
+wfcontext.setVariable("uidNumber", uidNumber);
+wfcontext.setVariable("isEstrangeiro", isEstrangeiro);
+wfcontext.setVariable("cpf", cpf);
+wfcontext.setVariable("passaporte", passaporte);
+wfcontext.setVariable("TIMLogin", TIMLogin);
+wfcontext.setVariable("nomeCompleto", nomeCompleto);
+wfcontext.setVariable("dataNascimento", dataNascimento);
+wfcontext.setVariable("telefone", telefone);
+wfcontext.setVariable("emailExterno", emailExterno);
+wfcontext.setVariable("gestorTIM", gestorTIM);
+wfcontext.setVariable("responsavelExterno", responsavelExterno);
+wfcontext.setVariable("empresaExterna", empresaExterna);
+wfcontext.setVariable("empresaTIM", empresaTIM);
+wfcontext.setVariable("areaTIM", areaTIM);
+wfcontext.setVariable("numeroContrato", numeroContrato);
+wfcontext.setVariable("tipoUsuario", tipoUsuario);
+wfcontext.setVariable("dataCriacao", dataCriacao);
+wfcontext.setVariable("dataAdmissao", dataAdmissao);
+wfcontext.setVariable("dataDesligamento", dataDesligamento);
+wfcontext.setVariable("terminalLinux", terminalLinux);
+wfcontext.setVariable("emailTIM", emailTIM);
+wfcontext.setVariable("statusUsuario", statusUsuario);
+wfcontext.setVariable("situacaoUsuario", situacaoUsuario);
+wfcontext.setVariable("dataModificacao", dataModificacao);
+wfcontext.setVariable("realizadoPor", realizadoPor);
+wfcontext.setVariable("descricao", descricao);
+wfcontext.setVariable("tipoAcao", tipoAcao);
+
+wfcontext.getWorkflowCase().getTaskResult().setName("Gerenciamento de Usuarios - " + tipoUsuario + " - " + nomeCompleto + " - " + dataModificacao);
+
+]]></Source>
+                            
+        
+        </Script>
+                    
+        
+        <Transition to="Response"/>
+                  
+    
+    </Step>
+          
+    
+    <Step icon="Task" name="Create Identity" posX="725" posY="85">
+                    
+        
+        <ConditionScript>
+                              
+            
+            <Source><![CDATA[
+                                
+                
+                                
+                if ("SOFTWARE".equals(tipoUsuario) || "RPA".equals(tipoUsuario)) {
+   return true;
+}
+                            
+            
+                            
+            ]]></Source>
+                            
+        
+        </ConditionScript>
+                    
+        
+        <Description>A criação da Identidade é feita diretamente apenas pra usuários IMPESSOAIS. Demais usuário é feita através da agregação normal</Description>
+                    
+        
+        <Script>
+                              
+            
+            <Source><![CDATA[
+                                
+                
+                                
+                import sailpoint.object.*;
+
+Identity identity = new Identity();
+
+identity.setName(TIMLogin);
+identity.setAttribute("TIM_login", TIMLogin);
+identity.setAttribute("TIM_uidNumber", uidNumber);
+
+if (cpf != null && cpf != void) {
+   identity.setAttribute("cpf", cpf);
+   identity.setAttribute("TIM_cpf", cpf);
+}
+
+if (passaporte != null && passaporte != void) {
+   identity.setAttribute("TIM_passaporte", passaporte);
+}
+
+context.saveObject(identity);
+context.commitTransaction();
+                            
+            
+                            
+            ]]></Source>
+                            
+        
+        </Script>
+                    
+        
+        <Transition to="Aggregation"/>
+                  
+    
+    </Step>
+          
+    
+    <Step action="refreshIdentity" icon="Task" name="Identity Refresh - Sync" posX="912" posY="264">
+                    
+        
+        <Arg name="identityName">
+                              
+            
+            <Script>
+                                        
+                
+                <Source><![CDATA[
+                                        
+                    
+                                        
+                             import sailpoint.object.*;
+
+          String identityName = null;
+
+          QueryOptions queryOptions = new QueryOptions();
+          queryOptions.addFilter(Filter.eq("TIM_uidNumber", uidNumber));
+
+          Iterator iterator = context.search(Identity.class, queryOptions);
+
+          while (iterator.hasNext()) {
+          Object thisObject = iterator.next();
+          identityName = thisObject.getName();
+          }
+          sailpoint.tools.Util.flushIterator(iterator);
+
+          return identityName;
+                                    
+                
+                                    
+                ]]></Source>
+                                      
+            
+            </Script>
+                            
+        
+        </Arg>
+                    
+        
+        <Arg name="synchronizeAttributes" value="true"/>
+                    
+        
+        <Transition to="Stop"/>
+                  
+    
+    </Step>
+        
+
+</Workflow>
